@@ -1,6 +1,6 @@
 # Magical-Arena
 
-# Implementiaon will be done using Java-SpringBoot and Maven
+# Implementation will be done using Java-SpringBoot and Maven
 
 # Game Rules:
 Every Player is defined by a “health” attribute, “strength” attribute and an “attack” attribute - all positive integers. The player dies if his health attribute touches 0. 
@@ -19,3 +19,48 @@ Player B attacks and rolls die. Die roll : 4. Player A defends and rolls die. Di
 Attack damage is 4 * 5 = 20 ; Defending strength = 5 * 3 = 15 ; Player A health reduced by 5 to 45
 
 And so on
+
+# Understanding Assignment:
+Player:
+Health
+Strength 
+Attack
+
+Attacking Dice
+Defending Dice
+
+Player’s attack: Attack*AttackDiceValue
+Player’s defense: Strength*DefenseDiceValue
+
+
+Player’s health after round: 
+if (attack>defense) 
+	health=health - (playersAttach - playersDefense)
+
+Game ends when health=0.
+
+To start a round: A player with lower health attacks first at the start of a match.
+
+Sample Game:
+player1:
+  health: 50
+  strength: 5
+  attack: 10
+
+player2:
+  health: 100
+  strength: 10
+  attack: 50
+
+sample round:
+  - as health of p1<p2:
+	player1 starts the round, 
+    PLAYER A ATTACKS:
+  - attackerDice: 5, defenderDice: 2
+  - attackDamage: 5*10=50, defenseDamage: 2*10=20
+  - playerB health: 100-(50-20)=70
+    PLAYER B ATTACKS:
+  - attackerDice: 4, defenderDice: 3
+  - attackDamage: 4*5=20, defenseDamage: 5*3=15
+  - playerB health: 50-(20-15)=45
+
