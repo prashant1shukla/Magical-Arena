@@ -1,8 +1,72 @@
-# Magical-Arena
+# Magical Arena
 
-# Implementation will be done using Java-SpringBoot and Maven
+Magical Arena is a Spring Boot application where players can fight matches in a magical arena. This project demonstrates basic Spring Boot functionality, validation, exception handling, and unit testing.
 
-# Game Rules:
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Game Rules](#game-rules)
+- [unserstanding Assignemnt](#understanding-assignment)
+
+## Features
+
+- Player registration and validation
+- Match simulation between players
+- Custom exception handling
+- Dice roll utility for random attack and defense values
+
+## Prerequisites
+
+- Java 21
+- Maven 3.8+
+- An IDE like IntelliJ IDEA or VSCode
+
+## Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/yourusername/magical-arena.git
+   cd magical-arena
+
+2. **Build the project using:**
+  mvn clean install
+
+3. **Run the application**
+
+4. **API Endpoints:**
+  URL: /arena/start
+  Method: POST
+  Request Body:
+  {
+      "player1": {
+          "health": 50,
+          "attack": 10,
+          "strength": 5
+      },
+      "player2": {
+          "health": 50,
+          "attack": 10,
+          "strength": 5
+      }
+  }
+  Response:
+  {
+    "result": "The winner is: Player 2"
+  }
+  or 
+  {
+    "result": "The winner is: Player 1"
+  }
+
+5. **Testing:**
+ mvn test
+
+6. Game Rules:
 Every Player is defined by a “health” attribute, “strength” attribute and an “attack” attribute - all positive integers. The player dies if his health attribute touches 0. 
 Any two player can fight a match in the arena. Players attack in turns. Attacking player rolls the attacking dice and the defending player rolls the defending dice. The “attack”  value multiplied by the outcome of the  attacking dice roll is the damage created by the attacker. The defender “strength” value, multiplied by the outcome of the defending dice is the damage defended by the defender. Whatever damage created by attacker which is in excess of the damage defended by the defender will reduce the “health” of the defender. Game ends when any players health reaches 0
 
@@ -20,11 +84,15 @@ Attack damage is 4 * 5 = 20 ; Defending strength = 5 * 3 = 15 ; Player A health 
 
 And so on
 
-# Understanding Assignment:
+7. Understanding Assignment:
 Player:
 Health
 Strength 
 Attack
+
+Match:
+Player1
+Player2 
 
 Attacking Dice
 Defending Dice
