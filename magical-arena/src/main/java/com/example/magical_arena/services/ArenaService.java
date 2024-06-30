@@ -1,20 +1,20 @@
 package com.example.magical_arena.services;
 
+import com.example.magical_arena.constants.MessageConstants;
 import com.example.magical_arena.models.Match;
 import com.example.magical_arena.models.Player;
+import com.example.magical_arena.utils.DiceUtil;
 import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
 public class ArenaService {
 
-    private final Random random = new Random();
-
     public String startMatch(Player player1, Player player2) {
         Match match = new Match(player1, player2);
         fight(match);
         Player winner = getWinner(match);
-        return "The winner is: " + (winner == player1 ? "Player 1" : "Player 2");
+        return MessageConstants.WINNER_MESSAGE + (winner == player1 ? "Player 1" : "Player 2");
     }
 
     private void fight(Match match) {
@@ -30,8 +30,8 @@ public class ArenaService {
     }
 
     private void playTurn(Player attacker, Player defender) {
-        int attackRoll = random.nextInt(6) + 1;
-        int defendRoll = random.nextInt(6) + 1;
+        int attackRoll = DiceUtil.rollDice();
+        int defendRoll = DiceUtil.rollDice();
 
         int attackDamage = attackRoll * attacker.getAttack();
         int defense = defendRoll * defender.getStrength();

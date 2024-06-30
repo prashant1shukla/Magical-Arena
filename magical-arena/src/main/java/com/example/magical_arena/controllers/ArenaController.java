@@ -1,5 +1,6 @@
 package com.example.magical_arena.controllers;
 
+import com.example.magical_arena.constants.ApiConstants;
 import com.example.magical_arena.dto.requestDTO.StartMatchRequestDTO;
 import com.example.magical_arena.dto.responseDTO.StartMatchResponseDTO;
 import com.example.magical_arena.models.Player;
@@ -13,19 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+
 @RestController
-@RequestMapping("/arena")
+@RequestMapping(ApiConstants.BASE_PATH)
 @CrossOrigin(origins = "*")
 public class ArenaController {
 
     @Autowired
     private ArenaService arenaService;
 
-    @PostMapping("/start")
-    public ResponseEntity<StartMatchResponseDTO> startMatch(@RequestBody StartMatchRequestDTO request) {
-        if (request.getPlayer1() == null || request.getPlayer2() == null) {
-            return ResponseEntity.badRequest().body(new StartMatchResponseDTO("Two players are required to start a match."));
-        }
+    @PostMapping(ApiConstants.START_MATCH)
+    public ResponseEntity<StartMatchResponseDTO> startMatch(@Valid @RequestBody StartMatchRequestDTO request) {
         String result = arenaService.startMatch(request.getPlayer1(), request.getPlayer2());
         StartMatchResponseDTO response = new StartMatchResponseDTO(result);
         return ResponseEntity.ok(response);
