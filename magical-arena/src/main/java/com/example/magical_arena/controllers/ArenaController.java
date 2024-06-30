@@ -1,8 +1,11 @@
 package com.example.magical_arena.controllers;
 
+import com.example.magical_arena.dto.requestDTO.StartMatchRequestDTO;
+import com.example.magical_arena.dto.responseDTO.StartMatchResponseDTO;
 import com.example.magical_arena.models.Player;
 import com.example.magical_arena.services.ArenaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +22,12 @@ public class ArenaController {
     private ArenaService arenaService;
 
     @PostMapping("/start")
-    public String startMatch(@RequestBody Player[] players) {
-        if (players.length != 2) {
-            throw new IllegalArgumentException("Two players are required to start a match.");
+    public ResponseEntity<StartMatchResponseDTO> startMatch(@RequestBody StartMatchRequestDTO request) {
+        if (request.getPlayer1() == null || request.getPlayer2() == null) {
+            return ResponseEntity.badRequest().body(new StartMatchResponseDTO("Two players are required to start a match."));
         }
-        return arenaService.startMatch(players[0], players[1]);
-    }
-    @GetMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
+        String result = arenaService.startMatch(request.getPlayer1(), request.getPlayer2());
+        StartMatchResponseDTO response = new StartMatchResponseDTO(result);
+        return ResponseEntity.ok(response);
     }
 }

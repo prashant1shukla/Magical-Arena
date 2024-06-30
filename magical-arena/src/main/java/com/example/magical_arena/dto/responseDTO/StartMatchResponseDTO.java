@@ -1,4 +1,4 @@
-package com.example.magical_arena.models;
+package com.example.magical_arena.dto.responseDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Match {
-    private Player player1;
-    private Player player2;
+public class StartMatchResponseDTO {
+    private String result;
 }
